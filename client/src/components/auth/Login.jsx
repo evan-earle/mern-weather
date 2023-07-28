@@ -37,6 +37,7 @@ export const Login = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="username"
           />
         </div>
         <div className="form-group">
@@ -47,6 +48,7 @@ export const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
           />
         </div>
         <button type="submit">Login</button>
