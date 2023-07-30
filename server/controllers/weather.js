@@ -22,11 +22,13 @@ export const getProfile = async (req, res, next) => {
 
 export const setMainCity = async (req, res, next) => {
   try {
-    await Weather.findOneAndUpdate({
-      mainCity: req.body.mainCity,
-    });
-
-    return res.status(200).json("Main city set");
+    const updatedMainCity = await Weather.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        mainCity: req.params.mainCity,
+      }
+    );
+    return res.status(200).json(updatedMainCity);
   } catch (err) {
     return next(err);
   }
@@ -70,6 +72,7 @@ export const setFavouriteThree = async (req, res, next) => {
 
 export const getWeather = async (req, res, next) => {
   const city = req.params.city;
+
   try {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`

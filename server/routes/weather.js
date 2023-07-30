@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 router.get("/", getProfile);
-router.put("/main", setMainCity);
+router.put("/main/:mainCity", setMainCity);
 router.put("/one", setFavouriteOne);
 router.put("/two", setFavouriteTwo);
 router.put("/three", setFavouriteThree);

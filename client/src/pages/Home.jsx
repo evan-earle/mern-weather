@@ -1,12 +1,13 @@
 import { Navbar } from "../components/nav/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const Home = () => {
-  const [main, setMain] = useState("");
+  const getWeather = () => {
+    console.log("homepage");
+  };
 
-  // const data = await axios.get(`/api/weather/${search}`);
-  //       console.log(data);
+  getWeather();
 
   return (
     <div>
