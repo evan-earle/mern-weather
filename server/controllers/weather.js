@@ -4,6 +4,7 @@ import Weather from "../models/Weather.js";
 export const getProfile = async (req, res, next) => {
   try {
     const cities = await Weather.findOne({ user: req.user.id });
+
     if (!cities) {
       const newWeather = new Weather({
         mainCity: "",
@@ -72,7 +73,6 @@ export const setFavouriteThree = async (req, res, next) => {
 
 export const getWeather = async (req, res, next) => {
   const city = req.params.city;
-
   try {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`
