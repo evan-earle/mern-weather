@@ -8,6 +8,7 @@ export const Home = () => {
   const [favouriteCityTwo, setFavouriteCityTwo] = useState("");
   const [favouriteCityThree, setFavouriteCityThree] = useState("");
   const [search, setSearch] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   const getCitiesFromDb = async () => {
     try {
@@ -28,12 +29,15 @@ export const Home = () => {
   };
 
   const getCity = async (city) => {
+    setToggle(false);
     const weather = await axios.get(`/api/weather/${city}`);
     console.log(weather);
   };
 
   const getWeather = async (e) => {
+    setToggle(true);
     e.preventDefault();
+
     const weather = await axios.get(`/api/weather/${search}`);
     console.log(weather);
   };
@@ -57,7 +61,8 @@ export const Home = () => {
       </form>
       <Navbar />
 
-      <h1>{}</h1>
+      {!toggle ? <h1>{mainCity}</h1> : <h1>{search}</h1>}
+
       {/*
        <button type="button" onClick={getProfile}>
          {favouriteCityOne}
