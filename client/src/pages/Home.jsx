@@ -9,6 +9,7 @@ export const Home = () => {
   const [favouriteCityThree, setFavouriteCityThree] = useState("");
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [name, setName] = useState("");
 
   const getCitiesFromDb = async () => {
     try {
@@ -40,7 +41,10 @@ export const Home = () => {
 
     const weather = await axios.get(`/api/weather/${search}`);
     console.log(weather);
+    setName(weather.data.name)
   };
+
+ 
 
   useEffect(() => {
     getCitiesFromDb();
@@ -54,14 +58,15 @@ export const Home = () => {
       <form onSubmit={getWeather}>
         <input
           type="text"
-          onChange={(e) => setSearch(e.target.value)}
+           onChange={(e) => setSearch(e.target.value)}
+         
           value={search}
         />
         <button type="submit">Search</button>
       </form>
       <Navbar />
 
-      {!toggle ? <h1>{mainCity}</h1> : <h1>{search}</h1>}
+      {!toggle ? <h1>{mainCity}</h1> : <h1>{name}</h1>}
 
       {/*
        <button type="button" onClick={getProfile}>
@@ -76,3 +81,25 @@ export const Home = () => {
     </div>
   );
 };
+
+
+// data.main.temp
+// data.list[0].main.temp
+// data.list[0].weather[0].description
+// data.list[0].weather[0].icon
+
+// data.list[8].main.temp
+// data.list[8].weather[0].description
+// data.list[8].weather[0].icon
+
+// data.list[16].main.temp
+// data.list[16].weather[0].description
+// data.list[16].weather[0].icon
+
+// data.list[24].main.temp
+// data.list[24].weather[0].description
+// data.list[24].weather[0].icon
+
+// data.list[32].main.temp
+// data.list[32].weather[0].description
+// data.list[32].weather[0].icon
