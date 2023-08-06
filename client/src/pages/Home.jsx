@@ -41,10 +41,8 @@ export const Home = () => {
 
     const weather = await axios.get(`/api/weather/${search}`);
     console.log(weather);
-    setName(weather.data.name)
+    setName(weather.data[0].name);
   };
-
- 
 
   useEffect(() => {
     getCitiesFromDb();
@@ -58,8 +56,7 @@ export const Home = () => {
       <form onSubmit={getWeather}>
         <input
           type="text"
-           onChange={(e) => setSearch(e.target.value)}
-         
+          onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
         <button type="submit">Search</button>
@@ -67,7 +64,9 @@ export const Home = () => {
       <Navbar />
 
       {!toggle ? <h1>{mainCity}</h1> : <h1>{name}</h1>}
+      <h1>Current Conditions</h1>
 
+      <h1>Five Day Forecast</h1>
       {/*
        <button type="button" onClick={getProfile}>
          {favouriteCityOne}
@@ -82,24 +81,23 @@ export const Home = () => {
   );
 };
 
-
 // data.main.temp
-// data.list[0].main.temp
-// data.list[0].weather[0].description
-// data.list[0].weather[0].icon
+// data.list[5].main.temp
+// data.list[5].weather[0].description
+// data.list[5].weather[0].icon
 
-// data.list[8].main.temp
-// data.list[8].weather[0].description
-// data.list[8].weather[0].icon
+// data.list[13].main.temp
+// data.list[13].weather[0].description
+// data.list[13].weather[0].icon
 
-// data.list[16].main.temp
-// data.list[16].weather[0].description
-// data.list[16].weather[0].icon
+// data.list[21].main.temp
+// data.list[21].weather[0].description
+// data.list[21].weather[0].icon
 
-// data.list[24].main.temp
-// data.list[24].weather[0].description
-// data.list[24].weather[0].icon
+// data.list[29].main.temp
+// data.list[29].weather[0].description
+// data.list[29].weather[0].icon
 
-// data.list[32].main.temp
-// data.list[32].weather[0].description
-// data.list[32].weather[0].icon
+// data.list[37].main.temp
+// data.list[37].weather[0].description
+// data.list[37].weather[0].icon

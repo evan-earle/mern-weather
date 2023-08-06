@@ -74,12 +74,19 @@ export const setFavouriteThree = async (req, res, next) => {
 export const getWeather = async (req, res, next) => {
   const city = req.params.city;
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.API_KEY}&units=metric`
-      );
-    return res.status(200).json(response.data);
+    const response = await Promise.all([
+      axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}&units=metric`
+      ),
+      axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.API_KEY}&units=metric`
+      ),
+    ]);
+
+    const data = response.map((response) => response.data);
+
+    return res.status(200).json(data);
   } catch (err) {
     return next(err);
   }
 };
-//  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}&units=metric`
