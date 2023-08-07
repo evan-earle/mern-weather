@@ -10,6 +10,11 @@ export const Home = () => {
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [name, setName] = useState("");
+  const [currentTemp, setCurrentTemp] = useState("");
+  const [minTemp, setMinTemp] = useState("");
+  const [maxTemp, setMaxTemp] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
 
   const getCitiesFromDb = async () => {
     try {
@@ -33,6 +38,12 @@ export const Home = () => {
     setToggle(false);
     const weather = await axios.get(`/api/weather/${city}`);
     console.log(weather);
+    setName(weather.data[0].name);
+    setCurrentTemp(weather.data[0].main.temp);
+    setMinTemp(weather.data[0].main.temp_min);
+    setMaxTemp(weather.data[0].main.temp_max);
+    setDescription(weather.data[0].weather[0].description);
+    setDate(weather.data[1].list[5].dt);
   };
 
   const getWeather = async (e) => {
@@ -42,6 +53,10 @@ export const Home = () => {
     const weather = await axios.get(`/api/weather/${search}`);
     console.log(weather);
     setName(weather.data[0].name);
+    setCurrentTemp(weather.data[0].main.temp);
+    setMinTemp(weather.data[0].main.temp_min);
+    setMaxTemp(weather.data[0].main.temp_max);
+    setDescription(weather.data[0].weather[0].description);
   };
 
   useEffect(() => {
@@ -62,21 +77,26 @@ export const Home = () => {
         <button type="submit">Search</button>
       </form>
       <Navbar />
-
       {!toggle ? <h1>{mainCity}</h1> : <h1>{name}</h1>}
       <h1>Current Conditions</h1>
-
+      {currentTemp}
+      {minTemp}
+      {maxTemp}
+      {description}
+      weathericon
       <h1>Five Day Forecast</h1>
-      {/*
-       <button type="button" onClick={getProfile}>
-         {favouriteCityOne}
-       </button>
-       <button type="button" onClick={getProfile}>
+      {date}
+      weathericon
+      <h1>Favourites</h1>
+      <button type="button" onClick={getCitiesFromDb}>
+        {favouriteCityOne}
+      </button>
+      <button type="button" onClick={getCitiesFromDb}>
         {favouriteCityTwo}
-       </button>
-       <button type="button" onClick={getProfile}>
-         {favouriteCityThree}
-       </button>  */}
+      </button>
+      <button type="button" onClick={getCitiesFromDb}>
+        {favouriteCityThree}
+      </button>
     </div>
   );
 };
