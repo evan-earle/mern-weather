@@ -59,6 +59,21 @@ export const Home = () => {
     setDescription(weather.data[0].weather[0].description);
   };
 
+  const setFavouriteOne = async () => {
+    await axios.put(`/api/weather/one/${search}`);
+    setFavouriteCityOne(`${search}`);
+  };
+
+  const setFavouriteTwo = async () => {
+    await axios.put(`/api/weather/two/${search}`);
+    setFavouriteCityTwo(`${search}`);
+  };
+
+  const setFavouriteThree = async () => {
+    await axios.put(`/api/weather/three/${search}`);
+    setFavouriteCityThree(`${search}`);
+  };
+
   useEffect(() => {
     getCitiesFromDb();
   }, []);
@@ -88,13 +103,13 @@ export const Home = () => {
       {date}
       weathericon
       <h1>Favourites</h1>
-      <button type="button" onClick={getCitiesFromDb}>
+      <button type="button" onClick={setFavouriteOne}>
         {favouriteCityOne}
       </button>
-      <button type="button" onClick={getCitiesFromDb}>
+      <button type="button" onClick={setFavouriteTwo}>
         {favouriteCityTwo}
       </button>
-      <button type="button" onClick={getCitiesFromDb}>
+      <button type="button" onClick={setFavouriteThree}>
         {favouriteCityThree}
       </button>
     </div>

@@ -37,11 +37,14 @@ export const setMainCity = async (req, res, next) => {
 
 export const setFavouriteOne = async (req, res, next) => {
   try {
-    await Weather.findOneAndUpdate({
-      favouriteCityOne: req.body.favouriteCityOne,
-    });
+    const updatedFavouriteOne = await Weather.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        favouriteCityOne: req.params.city,
+      }
+    );
 
-    return res.status(200).json("Favourite city one set");
+    return res.status(200).json(updatedFavouriteOne);
   } catch (err) {
     return next(err);
   }
@@ -49,11 +52,14 @@ export const setFavouriteOne = async (req, res, next) => {
 
 export const setFavouriteTwo = async (req, res, next) => {
   try {
-    await Weather.findOneAndUpdate({
-      favouriteCityTwo: req.body.favouriteCityTwo,
-    });
+    const updatedFavouriteTwo = await Weather.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        favouriteCityTwo: req.params.city,
+      }
+    );
 
-    return res.status(200).json("Favourite city two set");
+    return res.status(200).json(updatedFavouriteTwo);
   } catch (err) {
     return next(err);
   }
@@ -61,11 +67,14 @@ export const setFavouriteTwo = async (req, res, next) => {
 
 export const setFavouriteThree = async (req, res, next) => {
   try {
-    await Weather.findOneAndUpdate({
-      favouriteCityThree: req.body.favouriteCityThree,
-    });
+    const updatedFavouriteThree = await Weather.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        favouriteCityThree: req.params.city,
+      }
+    );
 
-    return res.status(200).json("Favourite city three set");
+    return res.status(200).json(updatedFavouriteThree);
   } catch (err) {
     return next(err);
   }
