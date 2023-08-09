@@ -8,7 +8,6 @@ export const Home = () => {
   const [favouriteCityTwo, setFavouriteCityTwo] = useState("");
   const [favouriteCityThree, setFavouriteCityThree] = useState("");
   const [search, setSearch] = useState("");
-  const [toggle, setToggle] = useState(false);
   const [name, setName] = useState("");
   const [currentTemp, setCurrentTemp] = useState("");
   const [minTemp, setMinTemp] = useState("");
@@ -22,20 +21,20 @@ export const Home = () => {
       const profile = await axios.get(`/api/weather`);
       console.log(profile);
 
-      const city = profile.data.mainCity;
+      const mainCity = profile.data.mainCity;
 
-      getCity(city);
+      getCity(mainCity);
+
       setMainCity(profile.data.mainCity);
-      // setFavouriteCityOne(profile.data.favouriteCityOne);
-      // setFavouriteCityTwo(profile.data.favouriteCityTwo);
-      // setFavouriteCityThree(profile.data.favouriteCityThree);
+      setFavouriteCityOne(profile.data.favouriteCityOne);
+      setFavouriteCityTwo(profile.data.favouriteCityTwo);
+      setFavouriteCityThree(profile.data.favouriteCityThree);
     } catch (err) {
       console.log(err);
     }
   };
 
   const getCity = async (city) => {
-    setToggle(false);
     const weather = await axios.get(`/api/weather/${city}`);
     console.log(weather);
     setName(weather.data[0].name);
@@ -47,7 +46,6 @@ export const Home = () => {
   };
 
   const getWeather = async (e) => {
-    setToggle(true);
     e.preventDefault();
 
     const weather = await axios.get(`/api/weather/${search}`);
@@ -60,18 +58,18 @@ export const Home = () => {
   };
 
   const setFavouriteOne = async () => {
-    await axios.put(`/api/weather/one/${search}`);
-    setFavouriteCityOne(`${search}`);
+    await axios.put(`/api/weather/one/${name}`);
+    setFavouriteCityOne(`${name}`);
   };
 
   const setFavouriteTwo = async () => {
-    await axios.put(`/api/weather/two/${search}`);
-    setFavouriteCityTwo(`${search}`);
+    await axios.put(`/api/weather/two/${name}`);
+    setFavouriteCityTwo(`${name}`);
   };
 
   const setFavouriteThree = async () => {
-    await axios.put(`/api/weather/three/${search}`);
-    setFavouriteCityThree(`${search}`);
+    await axios.put(`/api/weather/three/${name}`);
+    setFavouriteCityThree(name);
   };
 
   useEffect(() => {
@@ -92,7 +90,7 @@ export const Home = () => {
         <button type="submit">Search</button>
       </form>
       <Navbar />
-      {!toggle ? <h1>{mainCity}</h1> : <h1>{name}</h1>}
+      <h1>{name}</h1>
       <h1>Current Conditions</h1>
       {currentTemp}
       {minTemp}
@@ -104,14 +102,26 @@ export const Home = () => {
       weathericon
       <h1>Favourites</h1>
       <button type="button" onClick={setFavouriteOne}>
+        Set F1
+      </button>
+      <button id="1" type="button" onClick={() => getCity(favouriteCityOne)}>
         {favouriteCityOne}
       </button>
+      <br />
       <button type="button" onClick={setFavouriteTwo}>
+        Set F1
+      </button>
+      <button id="2" type="button" onClick={() => getCity(favouriteCityTwo)}>
         {favouriteCityTwo}
       </button>
+      <br />
       <button type="button" onClick={setFavouriteThree}>
+        Set F1
+      </button>
+      <button id="3" type="button" onClick={() => getCity(favouriteCityThree)}>
         {favouriteCityThree}
       </button>
+      <br />
     </div>
   );
 };
