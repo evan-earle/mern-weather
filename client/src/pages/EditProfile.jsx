@@ -1,3 +1,9 @@
+import { EditProfileForm } from "../components/profile/EditProfileForm";
+
 export const EditProfile = () => {
-  return <div>Edit Profile</div>;
+  return (
+    <div>
+      <EditProfileForm />
+    </div>
+  );
 };

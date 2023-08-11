@@ -74,7 +74,7 @@ export const Home = () => {
 
   useEffect(() => {
     getCitiesFromDb();
-  });
+  }, []);
 
   return (
     <div>
