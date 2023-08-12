@@ -109,14 +109,14 @@ export const Home = () => {
       </button>
       <br />
       <button type="button" onClick={setFavouriteTwo}>
-        Set F1
+        Set F2
       </button>
       <button id="2" type="button" onClick={() => getCity(favouriteCityTwo)}>
         {favouriteCityTwo}
       </button>
       <br />
       <button type="button" onClick={setFavouriteThree}>
-        Set F1
+        Set F3
       </button>
       <button id="3" type="button" onClick={() => getCity(favouriteCityThree)}>
         {favouriteCityThree}
