@@ -1,6 +1,9 @@
 import { Navbar } from "../components/nav/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
+// import { CurrentConditions } from "../components/weather/CurrentConditions";
+// import { Favourites } from "../components/weather/Favourites";
+// import { FiveDayForecast } from "../components/weather/FiveDayForecast";
 
 export const Home = () => {
   const [mainCity, setMainCity] = useState("");
@@ -78,7 +81,7 @@ export const Home = () => {
 
   return (
     <div>
-      <button type="button" onClick={getCitiesFromDb}>
+      <button type="button" className="ui button" onClick={getCitiesFromDb}>
         {mainCity}
       </button>
       <form onSubmit={getWeather}>

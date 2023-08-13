@@ -1,8 +1,11 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Auth.css";
+import clearDay from "../../assets/clearday.jpg";
 
-export const Register = () => {
+export const Register = ({ authType }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +18,7 @@ export const Register = () => {
         password,
       });
       toast.success("Registered");
+      authType("signin");
     } catch (err) {
       console.log(err);
       toast.error("Registration failed");
@@ -22,32 +26,54 @@ export const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={onSubmit}>
-        <h2>Register</h2>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            required
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
-          />
+    <div className="Auth-form-container">
+      <img
+        src={clearDay}
+        alt="sunny"
+        className="animate__animated animate__fadeInLeft"
+      />
+      <form
+        className="Auth-form animate__animated animate__fadeInRight"
+        onSubmit={onSubmit}
+      >
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign Up</h3>
+          <div className="text-center">
+            Already registered?{" "}
+            <span className="link-primary" onClick={() => authType("signin")}>
+              Sign In
+            </span>
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="username">Username</label>
+            <input
+              className="form-control mt-1"
+              required
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="password">Password</label>
+            <input
+              className="form-control mt-1"
+              required
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-primary" type="submit">
+              Register
+            </button>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            required
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password"
-          />
-        </div>
-        <button type="submit">Register</button>
       </form>
     </div>
   );
