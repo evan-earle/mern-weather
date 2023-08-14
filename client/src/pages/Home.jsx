@@ -20,7 +20,6 @@ export const Home = () => {
 
   const getCitiesFromDb = async () => {
     try {
-      // call db and check what cities are favourited
       const profile = await axios.get(`/api/weather`);
       console.log(profile);
 
@@ -81,6 +80,7 @@ export const Home = () => {
 
   return (
     <div>
+      <Navbar />
       <button type="button" className="ui button" onClick={getCitiesFromDb}>
         {mainCity}
       </button>
@@ -92,7 +92,6 @@ export const Home = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <Navbar />
       <h1>{name}</h1>
       <h1>Current Conditions</h1>
       {currentTemp}

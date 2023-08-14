@@ -2,7 +2,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Auth.css";
 import clearDay from "../../assets/clearday.jpg";
 import "animate.css";
@@ -13,8 +12,6 @@ export const Login = ({ authType }) => {
 
   const navigate = useNavigate();
 
-  // animate__animated animate__fadeOutLeft
-  // animate__animated animate__fadeOutRight
   const onSubmit = async (e) => {
     e.preventDefault();
     try {

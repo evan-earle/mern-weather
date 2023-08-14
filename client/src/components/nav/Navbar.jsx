@@ -3,6 +3,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
+import "semantic-ui-css/semantic.min.css";
 
 export const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -35,12 +37,22 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
-      <h1>{user.username}</h1>
-      <Link to="/edit-profile">Edit Profile</Link>
-      <button type="button" onClick={handleLogout}>
-        Logout
-      </button>
+    <div className="ui secondary menu">
+      <div className="right menu">
+        <div className="item">
+          <div className="ui icon input">
+            <input type="text" placeholder="Search..." />
+            <i aria-hidden="true" className="search icon"></i>
+          </div>
+        </div>
+        <span className="item">{user.username}</span>
+        <Link className="item" to="/edit-profile">
+          Edit Profile
+        </Link>
+        <a className="item" onClick={handleLogout}>
+          Logout
+        </a>
+      </div>
     </div>
   );
 };
