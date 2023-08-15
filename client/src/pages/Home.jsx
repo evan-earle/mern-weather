@@ -1,6 +1,7 @@
 import { Navbar } from "../components/nav/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "semantic-ui-css/semantic.min.css";
 // import { CurrentConditions } from "../components/weather/CurrentConditions";
 // import { Favourites } from "../components/weather/Favourites";
 // import { FiveDayForecast } from "../components/weather/FiveDayForecast";
@@ -81,7 +82,7 @@ export const Home = () => {
   return (
     <div>
       <Navbar />
-      <button type="button" className="ui button" onClick={getCitiesFromDb}>
+      <button type="button" onClick={getCitiesFromDb}>
         {mainCity}
       </button>
       <form onSubmit={getWeather}>

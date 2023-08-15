@@ -10,6 +10,10 @@ export const register = async (req, res, next) => {
     );
   }
   try {
+    const user = await User.findOne({ username: req.body.username });
+    if (user) {
+      return next(createError({ status: 401, message: "User already exists" }));
+    }
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(req.body.password, salt);
 
@@ -18,7 +22,6 @@ export const register = async (req, res, next) => {
       password: hashedPassword,
     });
     await newUser.save();
-
     return res.status(201).json("New user created");
   } catch (err) {
     console.log(err);

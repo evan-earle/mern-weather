@@ -1,7 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import "./Auth.css";
 import clearDay from "../../assets/clearday.jpg";
 
 export const Register = ({ authType }) => {
@@ -20,7 +19,11 @@ export const Register = ({ authType }) => {
       authType("signin");
     } catch (err) {
       console.log(err);
-      toast.error("Registration failed");
+      if (err.response.data.message === "User already exists") {
+        toast.error("User already exists");
+      } else {
+        toast.error("Registration failed");
+      }
     }
   };
 

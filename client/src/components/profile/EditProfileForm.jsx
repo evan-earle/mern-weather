@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
-import { BsArrowLeftShort } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 export const EditProfileForm = () => {
-  const [username, setUsername] = useState({ username: "" });
+  const [user, setUser] = useState({ username: "", password: "" });
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get("/api/users/me");
-        setUsername(data);
+        setUser(data);
       } catch (err) {
         console.log(err);
       }
@@ -19,8 +17,8 @@ export const EditProfileForm = () => {
   }, []);
 
   const updateUserInfo = (e) => {
-    setUsername({
-      ...username,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value,
     });
   };
@@ -28,36 +26,56 @@ export const EditProfileForm = () => {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("/api/users/me", username);
+      const res = await axios.put("/api/users/me", user);
       toast.success("Profile updated");
-      setUsername(res.data);
+      setUser(res.data);
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 1000);
     } catch (err) {
       console.log(err);
+      if (err.response.data.message === "User already exists") {
+        toast.error("User already exists");
+      }
     }
   };
 
   return (
-    <div>
-      <Link to="/">
-        <BsArrowLeftShort></BsArrowLeftShort>Home
-      </Link>
-      <div>
-        <h1>Edit Profile</h1>
-        <form onSubmit={updateProfile}>
-          <label htmlFor="username">
-            Username
+    <div className="Auth-form-container">
+      <form
+        className="Auth-form animate__animated animate__fadeInLeft"
+        onSubmit={updateProfile}
+      >
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Edit Profile</h3>
+          <div className="form-group mt-3">
+            <label htmlFor="username">Username</label>
             <input
+              className="form-control mt-1"
               type="text"
               name="username"
-              placeholder="Username"
               required
-              value={username.username}
+              value={user.username}
               onChange={updateUserInfo}
             />
-          </label>
-          <button type="submit">Save</button>
-        </form>
-      </div>
+          </div>
+          <div className="form-group mt-3">
+            <label htmlFor="password">Password</label>
+            <input
+              className="form-control mt-1"
+              type="password"
+              name="password"
+              required
+              onChange={updateUserInfo}
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-primary" type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };

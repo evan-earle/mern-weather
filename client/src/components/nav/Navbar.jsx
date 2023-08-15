@@ -3,12 +3,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Navbar.css";
 import "semantic-ui-css/semantic.min.css";
+import { useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getUser = async () => {
     try {
@@ -40,15 +41,24 @@ export const Navbar = () => {
     <div className="ui secondary menu">
       <div className="right menu">
         <div className="item">
-          <div className="ui icon input">
-            <input type="text" placeholder="Search..." />
-            <i aria-hidden="true" className="search icon"></i>
-          </div>
+          {!location.pathname === "/search" ||
+            location.pathname === "/edit-profile" || (
+              <div className="ui icon input">
+                <input type="text" placeholder="Search..." />
+                <i aria-hidden="true" className="search icon"></i>
+              </div>
+            )}
         </div>
         <span className="item">{user.username}</span>
-        <Link className="item" to="/edit-profile">
-          Edit Profile
-        </Link>
+        {location.pathname === "/" ? (
+          <Link className="item" to="/edit-profile">
+            Edit Profile
+          </Link>
+        ) : (
+          <Link className="item" to="/">
+            Home
+          </Link>
+        )}
         <a className="item" onClick={handleLogout}>
           Logout
         </a>

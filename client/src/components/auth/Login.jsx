@@ -2,7 +2,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import "./Auth.css";
 import clearDay from "../../assets/clearday.jpg";
 import "animate.css";
 
@@ -20,7 +19,9 @@ export const Login = ({ authType }) => {
         password,
       });
       const firstLogin = await axios.get("/api/weather");
-      firstLogin.data === null ? navigate("/search") : navigate("/");
+      firstLogin.data === null || firstLogin.data.mainCity === ""
+        ? navigate("/search")
+        : navigate("/");
 
       toast.success("Logged in");
     } catch (err) {

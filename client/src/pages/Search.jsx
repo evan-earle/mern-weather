@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "../components/nav/Navbar";
 import { useState } from "react";
 import axios from "axios";
 
@@ -19,7 +18,6 @@ export const Search = () => {
 
   return (
     <div>
-      <Navbar />
       <form onSubmit={onSubmit}>
         Search for location:
         <input type="text" onChange={(e) => setSearch(e.target.value)} />
