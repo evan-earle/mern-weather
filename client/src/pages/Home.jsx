@@ -2,6 +2,7 @@ import { Navbar } from "../components/nav/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
+import { useNavigate } from "react-router-dom";
 // import { CurrentConditions } from "../components/weather/CurrentConditions";
 // import { Favourites } from "../components/weather/Favourites";
 // import { FiveDayForecast } from "../components/weather/FiveDayForecast";
@@ -18,6 +19,7 @@ export const Home = () => {
   const [maxTemp, setMaxTemp] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
+  const navigate = useNavigate();
 
   const getCitiesFromDb = async () => {
     try {
@@ -77,6 +79,20 @@ export const Home = () => {
 
   useEffect(() => {
     getCitiesFromDb();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const firstLogin = await axios.get("/api/weather");
+        console.log(firstLogin);
+        firstLogin.data === null || firstLogin.data.mainCity === ""
+          ? navigate("/search")
+          : navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const Search = () => {
@@ -15,6 +15,20 @@ export const Search = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const firstLogin = await axios.get("/api/weather");
+        console.log(firstLogin);
+        firstLogin.data === null || firstLogin.data.mainCity === ""
+          ? navigate("/search")
+          : navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <div>
