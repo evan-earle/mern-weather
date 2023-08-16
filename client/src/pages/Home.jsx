@@ -85,7 +85,7 @@ export const Home = () => {
     (async () => {
       try {
         const firstLogin = await axios.get("/api/weather");
-        console.log(firstLogin);
+
         firstLogin.data === null || firstLogin.data.mainCity === ""
           ? navigate("/search")
           : navigate("/");

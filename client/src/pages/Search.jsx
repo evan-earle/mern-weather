@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import drizzlenight from "../assets/drizzlenight.jpg";
+import styles from "./Search.module.css";
 
 export const Search = () => {
   const [search, setSearch] = useState("");
@@ -20,7 +22,7 @@ export const Search = () => {
     (async () => {
       try {
         const firstLogin = await axios.get("/api/weather");
-        console.log(firstLogin);
+
         firstLogin.data === null || firstLogin.data.mainCity === ""
           ? navigate("/search")
           : navigate("/");
@@ -31,12 +33,38 @@ export const Search = () => {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        Search for location:
-        <input type="text" onChange={(e) => setSearch(e.target.value)} />
-        <button type="submit">Search</button>
+    <div className={styles["Auth-form-container"]}>
+      <form
+        className={`${styles["Auth-form"]} animate__animated animate__fadeInRight`}
+        onSubmit={onSubmit}
+      >
+        <div className={styles["Auth-form-content"]}>
+          <h3 className={styles["Auth-form-title"]}>
+            Search for a weather forecast
+          </h3>
+
+          <div className="form-group mt-3">
+            <label htmlFor="username">City</label>
+            <input
+              className="form-control mt-1"
+              required
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Enter city"
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </div>
       </form>
+      <img
+        src={drizzlenight}
+        alt="sunny"
+        className="animate__animated  animate__fadeInLeft"
+      />
     </div>
   );
 };

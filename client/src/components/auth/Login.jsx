@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import clearDay from "../../assets/clearday.jpg";
 import "animate.css";
+import styles from "./Auth.module.css";
 
 export const Login = ({ authType }) => {
   const [username, setUsername] = useState("");
@@ -31,21 +32,25 @@ export const Login = ({ authType }) => {
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className={styles["Auth-form-container"]}>
       <img
         src={clearDay}
         alt="sunny"
         className="animate__animated animate__fadeInRight"
       />
       <form
-        className="Auth-form animate__animated animate__fadeInLeft"
+        className={`${styles["Auth-form"]} animate__animated animate__fadeInLeft
+        `}
         onSubmit={onSubmit}
       >
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
+        <div className={styles["Auth-form-content"]}>
+          <h3 className={styles["Auth-form-title"]}>Sign In</h3>
           <div className="text-center">
             Not registered yet?{" "}
-            <span className="link-primary" onClick={() => authType("signup")}>
+            <span
+              className={`${styles["link-primary"]} link-primary`}
+              onClick={() => authType("signup")}
+            >
               Sign Up
             </span>
           </div>

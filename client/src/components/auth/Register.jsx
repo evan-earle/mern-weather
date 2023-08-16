@@ -2,6 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import clearDay from "../../assets/clearday.jpg";
+import styles from "./Auth.module.css";
 
 export const Register = ({ authType }) => {
   const [username, setUsername] = useState("");
@@ -28,21 +29,24 @@ export const Register = ({ authType }) => {
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className={styles["Auth-form-container"]}>
       <img
         src={clearDay}
         alt="sunny"
         className="animate__animated animate__fadeInLeft"
       />
       <form
-        className="Auth-form animate__animated animate__fadeInRight"
+        className={`${styles["Auth-form"]} animate__animated animate__fadeInRight`}
         onSubmit={onSubmit}
       >
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign Up</h3>
+        <div className={styles["Auth-form-content"]}>
+          <h3 className={styles["Auth-form-title"]}>Sign Up</h3>
           <div className="text-center">
             Already registered?{" "}
-            <span className="link-primary" onClick={() => authType("signin")}>
+            <span
+              className={`${styles["link-primary"]} link-primary`}
+              onClick={() => authType("signin")}
+            >
               Sign In
             </span>
           </div>
