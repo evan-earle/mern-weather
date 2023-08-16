@@ -12,7 +12,6 @@ export const Home = () => {
   const [favouriteCityOne, setFavouriteCityOne] = useState("");
   const [favouriteCityTwo, setFavouriteCityTwo] = useState("");
   const [favouriteCityThree, setFavouriteCityThree] = useState("");
-  const [search, setSearch] = useState("");
   const [name, setName] = useState("");
   const [currentTemp, setCurrentTemp] = useState("");
   const [minTemp, setMinTemp] = useState("");
@@ -25,11 +24,8 @@ export const Home = () => {
     try {
       const profile = await axios.get(`/api/weather`);
       console.log(profile);
-
       const mainCity = profile.data.mainCity;
-
       getCity(mainCity);
-
       setMainCity(profile.data.mainCity);
       setFavouriteCityOne(profile.data.favouriteCityOne);
       setFavouriteCityTwo(profile.data.favouriteCityTwo);
@@ -50,18 +46,6 @@ export const Home = () => {
     setDate(weather.data[1].list[5].dt);
   };
 
-  const getWeather = async (e) => {
-    e.preventDefault();
-
-    const weather = await axios.get(`/api/weather/${search}`);
-    console.log(weather);
-    setName(weather.data[0].name);
-    setCurrentTemp(weather.data[0].main.temp);
-    setMinTemp(weather.data[0].main.temp_min);
-    setMaxTemp(weather.data[0].main.temp_max);
-    setDescription(weather.data[0].weather[0].description);
-  };
-
   const setFavouriteOne = async () => {
     await axios.put(`/api/weather/one/${name}`);
     setFavouriteCityOne(`${name}`);
@@ -75,6 +59,11 @@ export const Home = () => {
   const setFavouriteThree = async () => {
     await axios.put(`/api/weather/three/${name}`);
     setFavouriteCityThree(name);
+  };
+
+  const setMainCityy = async () => {
+    await axios.put(`/api/weather/main/${name}`);
+    setMainCity(name);
   };
 
   useEffect(() => {
@@ -97,19 +86,15 @@ export const Home = () => {
 
   return (
     <div>
-      <Navbar />
-      <button type="button" onClick={getCitiesFromDb}>
-        {mainCity}
-      </button>
-      <form onSubmit={getWeather}>
-        <input
-          type="text"
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <Navbar
+        getMainCity={getCitiesFromDb}
+        mainCity={mainCity}
+        search={getCity}
+      />
       <h1>{name}</h1>
+      <button type="button" onClick={setMainCityy}>
+        Set main
+      </button>
       <h1>Current Conditions</h1>
       {currentTemp}
       {minTemp}

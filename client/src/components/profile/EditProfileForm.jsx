@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import styles from "./EditProfileForm.module.css";
 
 export const EditProfileForm = () => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -41,13 +42,13 @@ export const EditProfileForm = () => {
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className={styles["Auth-form-container"]}>
       <form
-        className="Auth-form animate__animated animate__fadeInLeft"
+        className={`${styles["Auth-form"]} animate__animated animate__fadeInLeft"`}
         onSubmit={updateProfile}
       >
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Edit Profile</h3>
+        <div className={styles["Auth-form-content"]}>
+          <h3 className={styles["Auth-form-title"]}>Edit Profile</h3>
           <div className="form-group mt-3">
             <label htmlFor="username">Username</label>
             <input

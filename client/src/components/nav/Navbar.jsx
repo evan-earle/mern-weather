@@ -3,11 +3,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
 import { useLocation } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ getMainCity, mainCity, search }) => {
   const [user, setUser] = useState(null);
+  const [navSearch, setNavSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,18 +37,39 @@ export const Navbar = () => {
     }
   };
 
+  const submitSearch = (e) => {
+    e.preventDefault();
+    search(navSearch);
+    setNavSearch("");
+  };
+
   return (
     <div className="ui secondary menu">
+      {location.pathname === "/" && (
+        <div className="item">
+          <button className="ui button" type="submit" onClick={getMainCity}>
+            {mainCity}
+          </button>
+        </div>
+      )}
       <div className="right menu">
         <div className="item">
           {!location.pathname === "/search" ||
             location.pathname === "/edit-profile" || (
-              <div className="ui icon input">
-                <input type="text" placeholder="Search..." />
-                <i aria-hidden="true" className="search icon"></i>
-              </div>
+              <form onSubmit={submitSearch}>
+                <div className="ui icon input">
+                  <input
+                    type="text"
+                    placeholder="Enter city"
+                    onChange={(e) => setNavSearch(e.target.value)}
+                    value={navSearch}
+                  />
+                  <i aria-hidden="true" className="search icon"></i>
+                </div>
+              </form>
             )}
         </div>
+
         <span className="item">{user.username}</span>
         {location.pathname === "/" ? (
           <Link className="item" to="/edit-profile">
