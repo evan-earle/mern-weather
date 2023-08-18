@@ -2,7 +2,6 @@ import { Navbar } from "../components/nav/Navbar";
 import { Favourites } from "../components/weather/Favourites";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "semantic-ui-css/semantic.min.css";
 import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
 

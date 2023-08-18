@@ -1,19 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import styles from "./Navbar.module.css";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import "animate.css";
 
 export const Navbar = ({ search }) => {
   const [user, setUser] = useState(null);
   const [navSearch, setNavSearch] = useState("");
+  const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const navRef = useRef();
 
   const showNavbar = () => {
-    navRef.current.classList.toggle("responsive_nav");
+    setClicked(!clicked);
   };
 
   const getUser = async () => {
@@ -50,24 +52,32 @@ export const Navbar = ({ search }) => {
 
   return (
     <header>
-      <nav ref={navRef}>
-        {!location.pathname === "/search" ||
-          location.pathname === "/edit-profile" || (
-            <form onSubmit={submitSearch}>
-              <div className="ui icon input">
-                <input
-                  type="text"
-                  placeholder="Enter city"
-                  onChange={(e) => setNavSearch(e.target.value)}
-                  value={navSearch}
-                  onSubmit={submitSearch}
-                />
-                <i aria-hidden="true" className="search icon"></i>
-              </div>
-            </form>
-          )}
-
-        <a>{user.username}</a>
+      {!location.pathname === "/search" ||
+        location.pathname === "/edit-profile" || (
+          <form onSubmit={submitSearch}>
+            <div className={styles["search-container"]}>
+              <input
+                type="text"
+                placeholder="Enter city"
+                onChange={(e) => setNavSearch(e.target.value)}
+                value={navSearch}
+                onSubmit={submitSearch}
+              />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className={styles.FontAwesomeGlass}
+              />
+            </div>
+          </form>
+        )}
+      <nav
+        className={
+          clicked
+            ? `${styles["active"]} ${styles.animate} animate__animated animate__fadeInDown`
+            : ` ${styles.animate} animate__animated animate__fadeInUp`
+        }
+      >
+        <span>{user.username}</span>
 
         {location.pathname === "/" ? (
           <Link to="/edit-profile">
@@ -77,16 +87,9 @@ export const Navbar = ({ search }) => {
           <Link to="/">Home</Link>
         )}
         <a onClick={handleLogout}>Logout</a>
-
-        <button
-          className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`}
-          onClick={showNavbar}
-        >
-          <FaTimes />
-        </button>
       </nav>
-      <button className={styles["nav-btn"]} onClick={showNavbar}>
-        <FaBars />
+      <button onClick={showNavbar} className={styles.hamburger}>
+        <FontAwesomeIcon icon={faBars} />
       </button>
     </header>
   );
