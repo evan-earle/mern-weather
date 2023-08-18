@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import styles from "./Navbar.module.css";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-export const Navbar = ({ getMainCity, mainCity, search }) => {
+export const Navbar = ({ search }) => {
   const [user, setUser] = useState(null);
   const [navSearch, setNavSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const navRef = useRef();
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
 
   const getUser = async () => {
     try {
@@ -44,46 +49,45 @@ export const Navbar = ({ getMainCity, mainCity, search }) => {
   };
 
   return (
-    <div className="ui secondary menu">
-      {location.pathname === "/" && (
-        <div className="item">
-          <button className="ui button" type="submit" onClick={getMainCity}>
-            {mainCity}
-          </button>
-        </div>
-      )}
-      <div className="right menu">
-        <div className="item">
-          {!location.pathname === "/search" ||
-            location.pathname === "/edit-profile" || (
-              <form onSubmit={submitSearch}>
-                <div className="ui icon input">
-                  <input
-                    type="text"
-                    placeholder="Enter city"
-                    onChange={(e) => setNavSearch(e.target.value)}
-                    value={navSearch}
-                  />
-                  <i aria-hidden="true" className="search icon"></i>
-                </div>
-              </form>
-            )}
-        </div>
+    <header>
+      <nav ref={navRef}>
+        {!location.pathname === "/search" ||
+          location.pathname === "/edit-profile" || (
+            <form onSubmit={submitSearch}>
+              <div className="ui icon input">
+                <input
+                  type="text"
+                  placeholder="Enter city"
+                  onChange={(e) => setNavSearch(e.target.value)}
+                  value={navSearch}
+                  onSubmit={submitSearch}
+                />
+                <i aria-hidden="true" className="search icon"></i>
+              </div>
+            </form>
+          )}
 
-        <span className="item">{user.username}</span>
+        <a>{user.username}</a>
+
         {location.pathname === "/" ? (
-          <Link className="item" to="/edit-profile">
-            Edit Profile
+          <Link to="/edit-profile">
+            <a>Edit Profile</a>
           </Link>
         ) : (
-          <Link className="item" to="/">
-            Home
-          </Link>
+          <Link to="/">Home</Link>
         )}
-        <a className="item" onClick={handleLogout}>
-          Logout
-        </a>
-      </div>
-    </div>
+        <a onClick={handleLogout}>Logout</a>
+
+        <button
+          className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`}
+          onClick={showNavbar}
+        >
+          <FaTimes />
+        </button>
+      </nav>
+      <button className={styles["nav-btn"]} onClick={showNavbar}>
+        <FaBars />
+      </button>
+    </header>
   );
 };

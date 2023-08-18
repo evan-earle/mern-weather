@@ -1,11 +1,10 @@
 import { Navbar } from "../components/nav/Navbar";
+import { Favourites } from "../components/weather/Favourites";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
+import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
-// import { CurrentConditions } from "../components/weather/CurrentConditions";
-// import { Favourites } from "../components/weather/Favourites";
-// import { FiveDayForecast } from "../components/weather/FiveDayForecast";
 
 export const Home = () => {
   const [mainCity, setMainCity] = useState("");
@@ -61,7 +60,7 @@ export const Home = () => {
     setFavouriteCityThree(name);
   };
 
-  const setMainCityy = async () => {
+  const setMain = async () => {
     await axios.put(`/api/weather/main/${name}`);
     setMainCity(name);
   };
@@ -86,46 +85,35 @@ export const Home = () => {
 
   return (
     <div>
-      <Navbar
-        getMainCity={getCitiesFromDb}
+      <Navbar search={getCity} />
+      <Favourites
         mainCity={mainCity}
-        search={getCity}
+        getMainCity={getCitiesFromDb}
+        setMainCity={setMain}
+        favouriteOne={favouriteCityOne}
+        getFavouriteOne={() => getCity(favouriteCityOne)}
+        setFavouriteOne={setFavouriteOne}
+        favouriteTwo={favouriteCityTwo}
+        getFavouriteTwo={() => getCity(favouriteCityTwo)}
+        setFavouriteTwo={setFavouriteTwo}
+        favouriteThree={favouriteCityThree}
+        getFavouriteThree={() => getCity(favouriteCityThree)}
+        setFavouriteThree={setFavouriteThree}
       />
-      <h1>{name}</h1>
-      <button type="button" onClick={setMainCityy}>
-        Set main
-      </button>
-      <h1>Current Conditions</h1>
-      {currentTemp}
-      {minTemp}
-      {maxTemp}
-      {description}
-      weathericon
-      <h1>Five Day Forecast</h1>
-      {date}
-      weathericon
-      <h1>Favourites</h1>
-      <button type="button" onClick={setFavouriteOne}>
-        Set F1
-      </button>
-      <button id="1" type="button" onClick={() => getCity(favouriteCityOne)}>
-        {favouriteCityOne}
-      </button>
-      <br />
-      <button type="button" onClick={setFavouriteTwo}>
-        Set F2
-      </button>
-      <button id="2" type="button" onClick={() => getCity(favouriteCityTwo)}>
-        {favouriteCityTwo}
-      </button>
-      <br />
-      <button type="button" onClick={setFavouriteThree}>
-        Set F3
-      </button>
-      <button id="3" type="button" onClick={() => getCity(favouriteCityThree)}>
-        {favouriteCityThree}
-      </button>
-      <br />
+      <div>
+        <div className={styles.title}>
+          <h1 className={styles.cityHeader}>{name}</h1>
+        </div>
+        <h1>Current Conditions</h1>
+        {currentTemp}
+        {minTemp}
+        {maxTemp}
+        {description}
+        weathericon
+        <h1>Five Day Forecast</h1>
+        {date}
+        weathericon
+      </div>
     </div>
   );
 };
