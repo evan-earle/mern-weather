@@ -25,7 +25,11 @@ export const Favourites = ({
         <div>
           <div className={styles.maincities}>
             <div>
-              <button className="ui button" type="submit" onClick={getMainCity}>
+              <button
+                className={styles.favouriteCity}
+                type="submit"
+                onClick={getMainCity}
+              >
                 {mainCity.charAt(0).toUpperCase() +
                   mainCity.slice(1).toLowerCase()}
               </button>
@@ -33,18 +37,18 @@ export const Favourites = ({
 
             <div className={styles.mainFavourite}>
               <button
-                className={`${styles.favouriteButton} ui mini circular icon button`}
+                className={`${styles.favouriteButton}`}
                 type="button"
                 onClick={setMainCity}
               >
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
               </button>
             </div>
           </div>
           <div className={styles.favourites}>
             <div>
               <button
-                className={`${styles.favouriteCity} ui button`}
+                className={`${styles.favouriteCity}`}
                 type="submit"
                 onClick={getFavouriteOne}
               >
@@ -57,17 +61,17 @@ export const Favourites = ({
 
             <div>
               <button
-                className={`${styles.favouriteButton} ui mini circular icon button`}
+                className={`${styles.favouriteButton} `}
                 type="button"
                 onClick={setFavouriteOne}
               >
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
               </button>
             </div>
 
             <div>
               <button
-                className={`${styles.favouriteCity} ui button`}
+                className={`${styles.favouriteCity}`}
                 type="submit"
                 onClick={getFavouriteTwo}
               >
@@ -80,17 +84,17 @@ export const Favourites = ({
 
             <div>
               <button
-                className={`${styles.favouriteButton} ui mini circular icon button`}
+                className={`${styles.favouriteButton} `}
                 type="button"
                 onClick={setFavouriteTwo}
               >
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
               </button>
             </div>
 
             <div>
               <button
-                className={`${styles.favouriteCity} ui button`}
+                className={`${styles.favouriteCity} `}
                 type="submit"
                 onClick={getFavouriteThree}
               >
@@ -103,11 +107,11 @@ export const Favourites = ({
 
             <div>
               <button
-                className={`${styles.favouriteButton} ui mini circular icon button`}
+                className={`${styles.favouriteButton} `}
                 type="button"
                 onClick={setFavouriteThree}
               >
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
               </button>
             </div>
           </div>

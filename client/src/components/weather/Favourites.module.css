@@ -1,0 +1,31 @@
+.favouriteButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.faHeart {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.favouriteCity {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.28571429rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem 0.75rem;
+  transition: 0.3s;
+}
+
+.favouriteButton:hover {
+  backdrop-filter: brightness(80%);
+}
+
+.favouriteCity:hover {
+  backdrop-filter: brightness(80%);
+}

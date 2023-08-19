@@ -83,7 +83,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <Navbar search={getCity} />
       <Favourites
         mainCity={mainCity}

@@ -11,7 +11,7 @@
 }
 
 header {
-  color: var(--textColor);
+  color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -29,7 +29,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: var(--textColor);
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
 
@@ -49,7 +49,7 @@ input {
   padding: 0.67857143em 1em;
   background: #ffffff;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.6);
   border-radius: 0.28571429rem;
   box-shadow: none;
   outline: none;
@@ -77,7 +77,7 @@ input:focus {
 .hamburger {
   background-color: transparent;
   border: 10px;
-  color: var(--textColor);
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   font-size: 30px;
   margin-left: 32px;
@@ -118,7 +118,7 @@ input:focus {
   a,
   nav a {
     margin-top: 2rem;
-    color: black;
+    color: rgba(0, 0, 0, 0.6);
   }
 
   .hamburger {
@@ -132,7 +132,7 @@ input:focus {
     margin: 0;
     width: 100%;
     background-color: #ffffff;
-    color: black;
+    color: rgba(0, 0, 0, 0.6);
   }
 }
 
