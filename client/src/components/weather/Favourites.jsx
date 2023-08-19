@@ -19,101 +19,63 @@ export const Favourites = ({
 }) => {
   const location = useLocation();
 
+  const SetFavouriteButton = ({ setCity }) => {
+    return (
+      <div>
+        <button
+          className={`${styles.favouriteButton}`}
+          type="button"
+          onClick={setCity}
+        >
+          <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
+        </button>
+      </div>
+    );
+  };
+
+  const GetFavouriteCity = ({ getCity, city }) => {
+    return (
+      <div>
+        <button
+          className={styles.favouriteCity}
+          type="submit"
+          onClick={getCity}
+        >
+          {city.charAt(0).toUpperCase() + city.slice(1).toLowerCase()}
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div>
       {location.pathname === "/" && (
         <div>
           <div className={styles.maincities}>
-            <div>
-              <button
-                className={styles.favouriteCity}
-                type="submit"
-                onClick={getMainCity}
-              >
-                {mainCity.charAt(0).toUpperCase() +
-                  mainCity.slice(1).toLowerCase()}
-              </button>
-            </div>
-
-            <div className={styles.mainFavourite}>
-              <button
-                className={`${styles.favouriteButton}`}
-                type="button"
-                onClick={setMainCity}
-              >
-                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
-              </button>
-            </div>
+            <GetFavouriteCity
+              getCity={getMainCity}
+              city={mainCity}
+            ></GetFavouriteCity>
+            <SetFavouriteButton setCity={setMainCity}></SetFavouriteButton>
           </div>
           <div className={styles.favourites}>
-            <div>
-              <button
-                className={`${styles.favouriteCity}`}
-                type="submit"
-                onClick={getFavouriteOne}
-              >
-                {!favouriteOne
-                  ? "Set favourite"
-                  : favouriteOne.charAt(0).toUpperCase() +
-                    favouriteOne.slice(1).toLowerCase()}
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${styles.favouriteButton} `}
-                type="button"
-                onClick={setFavouriteOne}
-              >
-                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${styles.favouriteCity}`}
-                type="submit"
-                onClick={getFavouriteTwo}
-              >
-                {!favouriteTwo
-                  ? "Set favourite"
-                  : favouriteTwo.charAt(0).toUpperCase() +
-                    favouriteTwo.slice(1).toLowerCase()}
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${styles.favouriteButton} `}
-                type="button"
-                onClick={setFavouriteTwo}
-              >
-                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${styles.favouriteCity} `}
-                type="submit"
-                onClick={getFavouriteThree}
-              >
-                {!favouriteThree
-                  ? "Set favourite"
-                  : favouriteThree.charAt(0).toUpperCase() +
-                    favouriteThree.slice(1).toLowerCase()}
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${styles.favouriteButton} `}
-                type="button"
-                onClick={setFavouriteThree}
-              >
-                <FontAwesomeIcon icon={faHeart} className={styles.faHeart} />
-              </button>
-            </div>
+            <GetFavouriteCity
+              getCity={getFavouriteOne}
+              city={favouriteOne}
+            ></GetFavouriteCity>
+            <SetFavouriteButton setCity={setFavouriteOne}></SetFavouriteButton>
+            <GetFavouriteCity
+              getCity={getFavouriteTwo}
+              city={favouriteTwo}
+            ></GetFavouriteCity>
+            <SetFavouriteButton setCity={setFavouriteTwo}></SetFavouriteButton>
+            <GetFavouriteCity
+              getCity={getFavouriteThree}
+              city={favouriteThree}
+            ></GetFavouriteCity>
+            <SetFavouriteButton
+              setCity={setFavouriteThree}
+            ></SetFavouriteButton>
           </div>
         </div>
       )}
