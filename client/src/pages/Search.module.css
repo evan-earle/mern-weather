@@ -45,3 +45,34 @@ label {
 .link-primary {
   cursor: pointer;
 }
+
+.search {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .Auth-form-container {
+    height: 100vh;
+    background-image: url(../assets/drizzlenight.jpg);
+    background-size: cover;
+  }
+  img {
+    display: none;
+  }
+  .Auth-form {
+    width: 25rem;
+    border-radius: 8px 8px 8px 8px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .Auth-form {
+    width: 18rem;
+    height: 22rem;
+    box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 8px 8px 8px 8px;
+    background-color: white;
+  }
+}

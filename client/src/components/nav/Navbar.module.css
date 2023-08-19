@@ -7,7 +7,7 @@
 
 :root {
   --mainColor: rgba(0, 0, 0, 0.1);
-  --textColor: rgba(0, 0, 0, 0.6);
+  --textColor: rgb(34, 34, 34);
 }
 
 header {
@@ -51,13 +51,11 @@ input {
   border: 1px solid rgba(34, 36, 38, 0.15);
   color: rgba(0, 0, 0, 0.87);
   border-radius: 0.28571429rem;
-  transition: box-shadow 0.1s ease, border-color 0.1s ease;
   box-shadow: none;
   outline: none;
 }
 
 input:focus {
-  outline: none;
   border-color: #85b7d9;
   background: #ffffff;
   box-shadow: none;
@@ -65,7 +63,7 @@ input:focus {
 }
 
 .FontAwesomeGlass {
-  color: var(--textColor);
+  color: rgba(0, 0, 0, 0.6);
   background: transparent;
   border: none;
   display: inline-block;
@@ -85,6 +83,10 @@ input:focus {
   margin-left: 32px;
   line-height: 70px;
   display: none;
+}
+
+.animate {
+  --animate-duration: 0s;
 }
 
 @media screen and (max-width: 768px) {
@@ -131,5 +133,14 @@ input:focus {
     width: 100%;
     background-color: #ffffff;
     color: black;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  header {
+    gap: 0;
+  }
+  .hamburger {
+    margin: 0 1rem 0 2rem;
   }
 }

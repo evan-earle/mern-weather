@@ -54,7 +54,10 @@ export const Search = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button className="btn btn-primary" type="submit">
+            <button
+              className={`btn btn-primary ${styles.search}`}
+              type="submit"
+            >
               Search
             </button>
           </div>

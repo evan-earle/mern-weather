@@ -6,20 +6,13 @@
   height: 80vh;
 }
 
-img {
-  width: 35rem;
-  height: 22rem;
-  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-  border-radius: 0px 8px 8px 0px;
-}
-
 .Auth-form {
   width: 25rem;
   height: 22rem;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  border-radius: 8px 0px 0px 8px;
+  border-radius: 8px 8px 8px 8px;
   background-color: white;
 }
 
@@ -44,4 +37,26 @@ label {
 
 .link-primary {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .Auth-form-container {
+    height: 100vh;
+    align-items: flex-start;
+    margin-top: 4rem;
+  }
+  img {
+    display: none;
+  }
+  .Auth-form {
+    width: 25rem;
+    border-radius: 8px 8px 8px 8px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .Auth-form {
+    width: 18rem;
+    height: 22rem;
+  }
 }

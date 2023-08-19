@@ -31,6 +31,7 @@ export const Register = ({ authType }) => {
   return (
     <div className={styles["Auth-form-container"]}>
       <img
+        style={{ borderRadius: "8px 0px 0px 8px" }}
         src={clearDay}
         alt="sunny"
         className="animate__animated animate__fadeInLeft"
