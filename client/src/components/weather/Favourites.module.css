@@ -1,3 +1,25 @@
+.container {
+  margin: 1rem 0 0 1rem;
+  border: solid red 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainCity {
+  display: flex;
+  align-items: center;
+}
+
+.favouritesContainer {
+  display: flex;
+}
+
+.favourites {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
 .favouriteButton {
   width: 2rem;
   height: 2rem;

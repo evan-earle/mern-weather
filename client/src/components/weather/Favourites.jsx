@@ -50,32 +50,45 @@ export const Favourites = ({
   return (
     <div>
       {location.pathname === "/" && (
-        <div>
-          <div className={styles.maincities}>
+        <div className={styles.container}>
+          <div className={styles.mainCity}>
             <GetFavouriteCity
               getCity={getMainCity}
               city={mainCity}
             ></GetFavouriteCity>
             <SetFavouriteButton setCity={setMainCity}></SetFavouriteButton>
           </div>
-          <div className={styles.favourites}>
-            <GetFavouriteCity
-              getCity={getFavouriteOne}
-              city={favouriteOne}
-            ></GetFavouriteCity>
-            <SetFavouriteButton setCity={setFavouriteOne}></SetFavouriteButton>
-            <GetFavouriteCity
-              getCity={getFavouriteTwo}
-              city={favouriteTwo}
-            ></GetFavouriteCity>
-            <SetFavouriteButton setCity={setFavouriteTwo}></SetFavouriteButton>
-            <GetFavouriteCity
-              getCity={getFavouriteThree}
-              city={favouriteThree}
-            ></GetFavouriteCity>
-            <SetFavouriteButton
-              setCity={setFavouriteThree}
-            ></SetFavouriteButton>
+
+          <div className={styles.favouritesContainer}>
+            <div className={styles.favourites}>
+              <GetFavouriteCity
+                getCity={getFavouriteOne}
+                city={favouriteOne}
+              ></GetFavouriteCity>
+              <SetFavouriteButton
+                setCity={setFavouriteOne}
+              ></SetFavouriteButton>
+            </div>
+
+            <div className={styles.favourites}>
+              <GetFavouriteCity
+                getCity={getFavouriteTwo}
+                city={favouriteTwo}
+              ></GetFavouriteCity>
+              <SetFavouriteButton
+                setCity={setFavouriteTwo}
+              ></SetFavouriteButton>
+            </div>
+
+            <div className={styles.favourites}>
+              <GetFavouriteCity
+                getCity={getFavouriteThree}
+                city={favouriteThree}
+              ></GetFavouriteCity>
+              <SetFavouriteButton
+                setCity={setFavouriteThree}
+              ></SetFavouriteButton>
+            </div>
           </div>
         </div>
       )}

@@ -1,16 +1,16 @@
 import { Navbar } from "../components/nav/Navbar";
 import { Favourites } from "../components/weather/Favourites";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Home.module.css";
-import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const [mainCity, setMainCity] = useState("");
   const [favouriteCityOne, setFavouriteCityOne] = useState("");
   const [favouriteCityTwo, setFavouriteCityTwo] = useState("");
   const [favouriteCityThree, setFavouriteCityThree] = useState("");
-  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
   const [currentTemp, setCurrentTemp] = useState("");
   const [minTemp, setMinTemp] = useState("");
   const [maxTemp, setMaxTemp] = useState("");
@@ -36,7 +36,7 @@ export const Home = () => {
   const getCity = async (city) => {
     const weather = await axios.get(`/api/weather/${city}`);
     console.log(weather);
-    setName(weather.data[0].name);
+    setCity(weather.data[0].name);
     setCurrentTemp(weather.data[0].main.temp);
     setMinTemp(weather.data[0].main.temp_min);
     setMaxTemp(weather.data[0].main.temp_max);
@@ -44,24 +44,22 @@ export const Home = () => {
     setDate(weather.data[1].list[5].dt);
   };
 
-  const setFavouriteOne = async () => {
-    await axios.put(`/api/weather/one/${name}`);
-    setFavouriteCityOne(`${name}`);
-  };
-
-  const setFavouriteTwo = async () => {
-    await axios.put(`/api/weather/two/${name}`);
-    setFavouriteCityTwo(`${name}`);
-  };
-
-  const setFavouriteThree = async () => {
-    await axios.put(`/api/weather/three/${name}`);
-    setFavouriteCityThree(name);
-  };
-
-  const setMain = async () => {
-    await axios.put(`/api/weather/main/${name}`);
-    setMainCity(name);
+  const setFavouriteCity = async (type) => {
+    await axios.put(`/api/weather/${type}/${city}`);
+    switch (type) {
+      case "main":
+        setMainCity(`${city}`);
+        break;
+      case "one":
+        setFavouriteCityOne(`${city}`);
+        break;
+      case "two":
+        setFavouriteCityTwo(`${city}`);
+        break;
+      case "three":
+        setFavouriteCityThree(`${city}`);
+        break;
+    }
   };
 
   useEffect(() => {
@@ -72,7 +70,6 @@ export const Home = () => {
     (async () => {
       try {
         const firstLogin = await axios.get("/api/weather");
-
         firstLogin.data === null || firstLogin.data.mainCity === ""
           ? navigate("/search")
           : navigate("/");
@@ -88,20 +85,20 @@ export const Home = () => {
       <Favourites
         mainCity={mainCity}
         getMainCity={getCitiesFromDb}
-        setMainCity={setMain}
+        setMainCity={() => setFavouriteCity("main")}
         favouriteOne={favouriteCityOne}
         getFavouriteOne={() => getCity(favouriteCityOne)}
-        setFavouriteOne={setFavouriteOne}
+        setFavouriteOne={() => setFavouriteCity("one")}
         favouriteTwo={favouriteCityTwo}
         getFavouriteTwo={() => getCity(favouriteCityTwo)}
-        setFavouriteTwo={setFavouriteTwo}
+        setFavouriteTwo={() => setFavouriteCity("two")}
         favouriteThree={favouriteCityThree}
         getFavouriteThree={() => getCity(favouriteCityThree)}
-        setFavouriteThree={setFavouriteThree}
+        setFavouriteThree={() => setFavouriteCity("three")}
       />
       <div>
         <div className={styles.title}>
-          <h1 className={styles.cityHeader}>{name}</h1>
+          <h1 className={styles.cityHeader}>{city}</h1>
         </div>
         <h1>Current Conditions</h1>
         {currentTemp}
