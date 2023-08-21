@@ -24,10 +24,10 @@ export const Login = ({ authType }) => {
         ? navigate("/search")
         : navigate("/");
 
-      toast.success("Logged in");
+      toast.success("Signed in");
     } catch (err) {
       console.log(err);
-      toast.error("Login failed");
+      toast.error("Signin failed");
     }
   };
 

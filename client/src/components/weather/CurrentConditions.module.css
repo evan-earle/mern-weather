@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  background-color: rgb(126, 167, 249);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.city {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* .currentConditions {
+  width: 60vw;
+  height: 20rem;
+  margin-top: 1rem;
+  box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
+  border-radius: 8px 8px 8px 8px;
+  background-color: white;
+} */
+
+.currentConditionsHeader {
+  margin-top: 1rem;
+}

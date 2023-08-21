@@ -37,7 +37,7 @@ export const Navbar = ({ search }) => {
     try {
       await axios.get("/api/auth/logout");
       setUser(null);
-      toast.success("Logged out");
+      toast.success("Signed out");
       navigate("/auth");
     } catch (err) {
       console.log(err);

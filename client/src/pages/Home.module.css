@@ -1,12 +1,13 @@
-.homeContainer {
-}
-
-.title {
+.weatherContainer {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100vw;
 }
 
-.cityHeader {
+.weatherConditions {
+  width: 60vw;
+  height: 20rem;
+  margin-top: 1rem;
+  box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
+  border-radius: 8px 8px 8px 8px;
+  background-color: white;
 }

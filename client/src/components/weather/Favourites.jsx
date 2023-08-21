@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Favourites.module.css";
@@ -17,8 +16,6 @@ export const Favourites = ({
   getFavouriteThree,
   setFavouriteThree,
 }) => {
-  const location = useLocation();
-
   const SetFavouriteButton = ({ setCity }) => {
     return (
       <div>
@@ -34,6 +31,7 @@ export const Favourites = ({
   };
 
   const GetFavouriteCity = ({ getCity, city }) => {
+    !city ? (city = "Set Favourite") : city;
     return (
       <div>
         <button
@@ -49,49 +47,51 @@ export const Favourites = ({
 
   return (
     <div>
-      {location.pathname === "/" && (
-        <div className={styles.container}>
-          <div className={styles.mainCity}>
+      <div className={styles.container}>
+        <div className={styles.mainCity}>
+          <div className={styles.favouritesName}>
             <GetFavouriteCity
               getCity={getMainCity}
               city={mainCity}
             ></GetFavouriteCity>
-            <SetFavouriteButton setCity={setMainCity}></SetFavouriteButton>
           </div>
+          <SetFavouriteButton setCity={setMainCity}></SetFavouriteButton>
+        </div>
 
-          <div className={styles.favouritesContainer}>
-            <div className={styles.favourites}>
+        <div className={styles.favouritesContainer}>
+          <div className={styles.favourites}>
+            <div className={styles.favouritesName}>
               <GetFavouriteCity
                 getCity={getFavouriteOne}
                 city={favouriteOne}
               ></GetFavouriteCity>
-              <SetFavouriteButton
-                setCity={setFavouriteOne}
-              ></SetFavouriteButton>
             </div>
+            <SetFavouriteButton setCity={setFavouriteOne}></SetFavouriteButton>
+          </div>
 
-            <div className={styles.favourites}>
+          <div className={styles.favourites}>
+            <div className={styles.favouritesName}>
               <GetFavouriteCity
                 getCity={getFavouriteTwo}
                 city={favouriteTwo}
               ></GetFavouriteCity>
-              <SetFavouriteButton
-                setCity={setFavouriteTwo}
-              ></SetFavouriteButton>
             </div>
+            <SetFavouriteButton setCity={setFavouriteTwo}></SetFavouriteButton>
+          </div>
 
-            <div className={styles.favourites}>
+          <div className={styles.favourites}>
+            <div className={styles.favouritesName}>
               <GetFavouriteCity
                 getCity={getFavouriteThree}
                 city={favouriteThree}
               ></GetFavouriteCity>
-              <SetFavouriteButton
-                setCity={setFavouriteThree}
-              ></SetFavouriteButton>
             </div>
+            <SetFavouriteButton
+              setCity={setFavouriteThree}
+            ></SetFavouriteButton>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 .container {
   margin: 1rem 0 0 1rem;
-  border: solid red 2px;
   display: flex;
   justify-content: space-between;
 }
@@ -50,4 +49,8 @@
 
 .favouriteCity:hover {
   backdrop-filter: brightness(80%);
+}
+
+.favouritesName {
+  margin-right: 0.5rem;
 }
