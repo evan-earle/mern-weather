@@ -7,8 +7,8 @@ import { Forecast } from "../components/weather/Forecast";
 import toast from "react-hot-toast";
 import axios from "axios";
 import styles from "./Home.module.css";
-
 import imgs from "../assets/images";
+import moment from "moment";
 
 export const Home = () => {
   const [mainCity, setMainCity] = useState("");
@@ -21,6 +21,9 @@ export const Home = () => {
   const [maxTemp, setMaxTemp] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
+  const [mainWeather, setMainWeather] = useState("");
+  const [background, setBackground] = useState("");
+  const [time, setTime] = useState("");
   const navigate = useNavigate();
 
   const getCitiesFromDb = async () => {
@@ -49,6 +52,8 @@ export const Home = () => {
       setMaxTemp(weather.data[0].main.temp_max);
       setDescription(weather.data[0].weather[0].description);
       setDate(weather.data[1].list[5].dt);
+      setMainWeather(weather.data[0].weather[0].main);
+      setTime(weather.data[0].timezone);
     } catch (err) {
       console.log(err);
       if (err.response.status === 404 || err.response.status === 500) {
@@ -78,6 +83,70 @@ export const Home = () => {
       console.log(err);
     }
   };
+
+  const backgroundPicker = () => {
+    const timezoneInMinutes = time / 60;
+    const currentTime = moment().utcOffset(timezoneInMinutes).format("h:mm A");
+    const hour = moment(currentTime, "h:mm A").format("HH");
+
+    let isDay = hour >= 7 && hour <= 18 ? true : false;
+    console.log(isDay);
+
+    switch (true) {
+      case isDay && mainWeather === "Clear":
+        console.log("day clear");
+        setBackground(`${imgs.clearDay}`);
+        break;
+      case !isDay && mainWeather === "Clear":
+        console.log("night clear");
+        setBackground(`${imgs.clearNight}`);
+        break;
+      case isDay && mainWeather === "Clouds":
+        console.log("day clouds");
+        setBackground(`${imgs.cloudDay}`);
+        break;
+      case !isDay && mainWeather === "Clouds":
+        console.log("night clouds");
+        setBackground(`${imgs.cloudNight}`);
+        break;
+      case isDay && mainWeather === "Snow":
+        console.log("day snow");
+        setBackground(`${imgs.snowDay}`);
+        break;
+      case !isDay && mainWeather === "Snow":
+        console.log("night snow");
+        setBackground(`${imgs.snowNight}`);
+        break;
+      case isDay && mainWeather === "Rain":
+        console.log("day rain");
+        setBackground(`${imgs.rainDay}`);
+        break;
+      case !isDay && mainWeather === "Rain":
+        console.log("night rain");
+        setBackground(`${imgs.rainNight}`);
+        break;
+      case isDay && mainWeather === "Drizzle":
+        console.log("day drizzle");
+        setBackground(`${imgs.drizzleDay}`);
+        break;
+      case !isDay && mainWeather === "Drizzle":
+        console.log("night drizzle");
+        setBackground(`${imgs.drizzleNight}`);
+        break;
+      case isDay && mainWeather === "Thunderstorm":
+        console.log("day thunderstorm");
+        setBackground(`${imgs.dayThunderstorm}`);
+        break;
+      case !isDay && mainWeather === "Thunderstorm":
+        console.log("night thunderstorm");
+        setBackground(`${imgs.dayThunderstorm}`);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    backgroundPicker();
+  });
 
   useEffect(() => {
     getCitiesFromDb();
@@ -113,40 +182,24 @@ export const Home = () => {
         getFavouriteThree={() => getWeather(favouriteCityThree)}
         setFavouriteThree={() => setFavouriteCity("three")}
       />
-      <div className={styles.weatherContainer}>
-        <div className={styles.weatherConditions}>
-          <CurrentConditions
-            city={city}
-            currentTemp={currentTemp}
-            minTemp={minTemp}
-            maxTemp={maxTemp}
-            description={description}
-            date={date}
-          />
-          <Forecast />
+      <div
+        className={styles.background}
+        style={{ background: `url(${background})` }}
+      >
+        <div className={styles.weatherContainer}>
+          <div className={styles.weatherConditions}>
+            <CurrentConditions
+              city={city}
+              currentTemp={currentTemp}
+              minTemp={minTemp}
+              maxTemp={maxTemp}
+              description={description}
+              date={date}
+            />
+            <Forecast />
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
-// data.main.temp
-// data.list[5].main.temp
-// data.list[5].weather[0].description
-// data.list[5].weather[0].icon
-
-// data.list[13].main.temp
-// data.list[13].weather[0].description
-// data.list[13].weather[0].icon
-
-// data.list[21].main.temp
-// data.list[21].weather[0].description
-// data.list[21].weather[0].icon
-
-// data.list[29].main.temp
-// data.list[29].weather[0].description
-// data.list[29].weather[0].icon
-
-// data.list[37].main.temp
-// data.list[37].weather[0].description
-// data.list[37].weather[0].icon

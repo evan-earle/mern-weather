@@ -15,7 +15,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 80px;
+  height: 10vh;
   background-color: var(--mainColor);
 }
 
@@ -37,7 +37,7 @@ nav a {
   background: white;
   position: relative;
   width: 100%;
-  border-radius: 0.28571429rem;
+  border-radius: 0.4rem;
 }
 
 input {
@@ -50,9 +50,10 @@ input {
   background: #ffffff;
   border: 1px solid rgba(34, 36, 38, 0.15);
   color: rgba(0, 0, 0, 0.6);
-  border-radius: 0.28571429rem;
+
   box-shadow: none;
   outline: none;
+  font-weight: 800;
 }
 
 input:focus {
@@ -71,7 +72,7 @@ input:focus {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 12px 20px;
+  padding: 10px 15px;
 }
 
 .hamburger {

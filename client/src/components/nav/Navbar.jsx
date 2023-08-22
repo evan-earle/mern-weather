@@ -57,6 +57,7 @@ export const Navbar = ({ search }) => {
           <form onSubmit={submitSearch}>
             <div className={styles["search-container"]}>
               <input
+                className="form-control"
                 type="text"
                 placeholder="Enter city"
                 onChange={(e) => setNavSearch(e.target.value)}

@@ -1,11 +1,23 @@
+.homeContainer {
+  height: 80vh;
+}
+
+.background {
+  height: 100%;
+  width: 100%;
+  opacity: 0.75;
+  background-size: 100%100% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
 .weatherContainer {
   display: flex;
   justify-content: center;
 }
 
 .weatherConditions {
-  width: 60vw;
-  height: 20rem;
+  width: 65vw;
   margin-top: 1rem;
   box-shadow: rgb(0 0 0 / 60%) 5px 5px 10px;
   border-radius: 8px 8px 8px 8px;
