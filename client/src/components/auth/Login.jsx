@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import clearDay from "../../assets/clearday.jpg";
+import clearDay from "../../assets/backgrounds/clearDay.jpg";
 import "animate.css";
 import styles from "./Auth.module.css";
 

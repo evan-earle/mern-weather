@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import clearDay from "../../assets/clearday.jpg";
+import clearDay from "../../assets/backgrounds/clearDay.jpg";
 import styles from "./Auth.module.css";
 
 export const Register = ({ authType }) => {

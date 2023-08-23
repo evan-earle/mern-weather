@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import drizzlenight from "../assets/drizzlenight.jpg";
+import drizzleNight from "../assets/backgrounds/drizzleNight.jpg";
 import styles from "./Search.module.css";
 
 export const Search = () => {
@@ -64,7 +64,7 @@ export const Search = () => {
         </div>
       </form>
       <img
-        src={drizzlenight}
+        src={drizzleNight}
         alt="sunny"
         className="animate__animated  animate__fadeInLeft"
       />

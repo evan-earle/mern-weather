@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "animate.css";
 
-export const Navbar = ({ search }) => {
+export const Navbar = ({ search, backgroundPicker }) => {
   const [user, setUser] = useState(null);
   const [navSearch, setNavSearch] = useState("");
   const [clicked, setClicked] = useState(false);
@@ -47,6 +47,7 @@ export const Navbar = ({ search }) => {
   const submitSearch = (e) => {
     e.preventDefault();
     search(navSearch);
+
     setNavSearch("");
   };
 
