@@ -15,6 +15,7 @@ export const CurrentConditions = (props) => {
 
         <div className={styles.weatherConditions}>
           <div className={styles.currentTemperature}>{props.currentTemp}˚C</div>
+
           <div className={styles.descriptionIcon}>
             <div className={styles.icon}>
               <FontAwesomeIcon icon={props.icon} style={props.iconStyle} />
@@ -22,7 +23,7 @@ export const CurrentConditions = (props) => {
             <div className={styles.description}>{props.description}</div>
           </div>
 
-          <div>
+          <div className={styles.temperatures}>
             <div>Feels like: {props.feelsLike}˚C</div>
             <div>Min temp: {props.minTemp}˚C</div>
             <div>Max temp: {props.maxTemp}˚C</div>

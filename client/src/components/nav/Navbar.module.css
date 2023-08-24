@@ -7,7 +7,7 @@
 
 :root {
   --mainColor: rgba(0, 0, 0, 0.1);
-  --textColor: rgb(34, 34, 34);
+  --textColor: rgba(34, 34, 34);
 }
 
 header {
@@ -134,6 +134,7 @@ input:focus {
     width: 100%;
     background-color: #ffffff;
     color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
   }
 }
 

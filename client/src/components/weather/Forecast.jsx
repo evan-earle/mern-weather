@@ -80,7 +80,7 @@ export const Forecast = (props) => {
           />
         </div>
         <div>{forecastTemp}˚C</div>
-        <div>{forecastDescription}</div>
+        <div className={styles.forecastDescription}>{forecastDescription}</div>
       </div>
     );
   };

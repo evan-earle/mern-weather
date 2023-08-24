@@ -39,7 +39,7 @@ export const Favourites = ({
           type="submit"
           onClick={getCity}
         >
-          {city.charAt(0).toUpperCase() + city.slice(1).toLowerCase()}
+          {city}
         </button>
       </div>
     );

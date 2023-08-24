@@ -1,6 +1,6 @@
 import { Navbar } from "../components/nav/Navbar";
 import { Favourites } from "../components/weather/Favourites";
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentConditions } from "../components/weather/CurrentConditions";
 import { Forecast } from "../components/weather/Forecast";
@@ -20,8 +20,10 @@ import {
   faCloudMoonRain,
   faCloudBolt,
 } from "@fortawesome/free-solid-svg-icons";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export const Home = () => {
+  const [loading, setLoading] = useState(false);
   const [mainCity, setMainCity] = useState("");
   const [favouriteCityOne, setFavouriteCityOne] = useState("");
   const [favouriteCityTwo, setFavouriteCityTwo] = useState("");
@@ -44,6 +46,7 @@ export const Home = () => {
   const navigate = useNavigate();
 
   const getCitiesFromDb = async () => {
+    setLoading(true);
     try {
       const profile = await axios.get(`/api/weather`);
       console.log(profile);
@@ -54,12 +57,14 @@ export const Home = () => {
       setFavouriteCityOne(profile.data.favouriteCityOne);
       setFavouriteCityTwo(profile.data.favouriteCityTwo);
       setFavouriteCityThree(profile.data.favouriteCityThree);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
   const getWeather = async (city) => {
+    setLoading(true);
     try {
       if (city) {
         const weather = await axios.get(`/api/weather/${city}`);
@@ -101,6 +106,7 @@ export const Home = () => {
           weather.data[1].list[37].weather[0].main,
         ]);
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
       if (err.response.status === 404 || err.response.status === 500) {
@@ -238,31 +244,42 @@ export const Home = () => {
         getFavouriteThree={() => getWeather(favouriteCityThree)}
         setFavouriteThree={() => setFavouriteCity("three")}
       />
-      <div
-        className={styles.background}
-        style={{ background: `url(${background}` }}
-      >
-        <div className={styles.weatherContainer}>
-          <div className={styles.weatherConditions}>
-            <CurrentConditions
-              icon={icon}
-              iconStyle={iconStyle}
-              city={city}
-              currentTemp={currentTemp}
-              minTemp={minTemp}
-              maxTemp={maxTemp}
-              description={description}
-              feelsLike={feelsLike}
-            />
-            <Forecast
-              forecastTemp={forecastTemp}
-              forecastDescription={forecastDescription}
-              forecastDate={forecastDate}
-              forecastIcon={forecastIcon}
-            />
+      {loading ? (
+        <PulseLoader
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "3rem",
+          }}
+          color="#00000060"
+        />
+      ) : (
+        <div
+          className={styles.background}
+          style={{ background: `url(${background}` }}
+        >
+          <div className={styles.weatherContainer}>
+            <div className={styles.weatherConditions}>
+              <CurrentConditions
+                icon={icon}
+                iconStyle={iconStyle}
+                city={city}
+                currentTemp={currentTemp}
+                minTemp={minTemp}
+                maxTemp={maxTemp}
+                description={description}
+                feelsLike={feelsLike}
+              />
+              <Forecast
+                forecastTemp={forecastTemp}
+                forecastDescription={forecastDescription}
+                forecastDate={forecastDate}
+                forecastIcon={forecastIcon}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

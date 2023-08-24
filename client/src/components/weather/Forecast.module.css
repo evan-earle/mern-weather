@@ -29,3 +29,43 @@
 .icon {
   font-size: 2rem;
 }
+
+@media screen and (max-width: 768px) {
+  .forecast {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .weatherCard {
+    width: 8rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .forecastDescription {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .forecast {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .weatherCard {
+    width: 8rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .forecastDescription {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

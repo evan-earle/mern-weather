@@ -34,14 +34,88 @@
 
 .currentTemperature {
   font-size: 3.5rem;
+  width: 50%;
 }
 
 .descriptionIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
 }
 
 .icon {
-  font-size: 5rem;
+  font-size: 4rem;
+  margin-top: -1rem;
+}
+
+.temperatures {
+  display: flex;
+  flex-direction: column;
+  align-items: last baseline;
+  width: 50%;
+}
+
+@media screen and (max-width: 988px) {
+  .weatherConditions {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .weatherConditions {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+  }
+  .temperatures {
+    display: flex;
+    align-items: center;
+    width: 50%;
+  }
+  .currentTemperature {
+    font-size: 3.5rem;
+    justify-content: center;
+    display: flex;
+    width: 50%;
+  }
+  .descriptionIcon {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .weatherConditions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+  }
+  .temperatures {
+    display: flex;
+    align-items: center;
+    width: 75%;
+  }
+  .currentTemperature {
+    font-size: 3.5rem;
+    justify-content: center;
+    display: flex;
+    width: 75%;
+  }
+  .descriptionIcon {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }
