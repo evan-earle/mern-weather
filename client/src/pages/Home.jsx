@@ -1,6 +1,6 @@
 import { Navbar } from "../components/nav/Navbar";
 import { Favourites } from "../components/weather/Favourites";
-import { useState, useEffect, CSSProperties } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentConditions } from "../components/weather/CurrentConditions";
 import { Forecast } from "../components/weather/Forecast";
