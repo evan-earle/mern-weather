@@ -12,6 +12,8 @@ dotenv.config({ path: "./config/.env" });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+connectToDB();
+
 // Create an express app
 const app = express();
 
@@ -41,9 +43,8 @@ app.use("/", express.static(clientpath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/dist/index.html"));
 });
-connectToDB().then(() => {
-  // Start our server
-  app.listen(process.env.PORT, () =>
-    console.log(`Server is running on port ${process.env.PORT}`)
-  );
-});
+
+// Start our server
+app.listen(process.env.PORT, () =>
+  console.log(`Server is running on port ${process.env.PORT}`)
+);
