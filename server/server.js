@@ -8,10 +8,13 @@ import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import * as url from "url";
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config({ path: "./config/.env" });
+
+console.log("filename:", __filename, "dirname:", __dirname);
+console.log("joining" + path.join(__dirname, "../client/dist/index.html"));
 
 // Create an express app
 const app = express();
