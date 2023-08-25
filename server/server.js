@@ -36,11 +36,11 @@ app.use((err, req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
-// const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/client/dist")));
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/dist/index.html"));
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // Start our server
