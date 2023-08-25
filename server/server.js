@@ -23,27 +23,27 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
-connectToDB();
+connectToDB().then(() => {
+  // Routes
+  app.use("/api", allRoutes);
 
-// Routes
-app.use("/api", allRoutes);
+  // error handler
+  app.use((err, req, res, next) => {
+    console.log({ err });
+    const status = err.statusCode || 500;
+    const message = err.message || "Internal server error";
+    return res.status(status).json({ message, stack: err.stack });
+  });
 
-// error handler
-app.use((err, req, res, next) => {
-  console.log({ err });
-  const status = err.statusCode || 500;
-  const message = err.message || "Internal server error";
-  return res.status(status).json({ message, stack: err.stack });
+  const clientpath = path.join(__dirname, "./client/dist");
+  app.use("/", express.static(clientpath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+  });
+
+  // Start our server
+  app.listen(process.env.PORT, () =>
+    console.log(`Server is running on port ${process.env.PORT}`)
+  );
 });
-
-const clientpath = path.join(__dirname, "./client/dist");
-app.use("/", express.static(clientpath));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-});
-
-// Start our server
-app.listen(process.env.PORT, () =>
-  console.log(`Server is running on port ${process.env.PORT}`)
-);
