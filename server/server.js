@@ -36,11 +36,11 @@ app.use((err, req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
-const clientpath = path.resolve(__dirname, "../client/dist");
+const clientpath = path.resolve(__dirname, "./client/dist");
 app.use("/", express.static(clientpath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/dist/index.html"));
 });
 
 // Start our server
