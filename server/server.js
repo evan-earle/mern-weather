@@ -8,13 +8,10 @@ import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
 dotenv.config({ path: "./config/.env" });
-
-console.log("filename:", __filename, "dirname:", __dirname);
-console.log("joining" + path.join(__dirname, "../client/dist/index.html"));
 
 // Create an express app
 const app = express();
@@ -40,10 +37,10 @@ app.use((err, req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
-app.use(express.static(path.join("../client/dist")));
+app.use(express.static(join(__dirname, "../client/dist")));
 
-app.use("*", (req, res) => {
-  res.sendFile(path.join("../client/dist/index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // Start our server
