@@ -9,8 +9,6 @@ import dotenv from "dotenv";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 dotenv.config({ path: "./config/.env" });
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 // Create an express app
 const app = express();
@@ -37,10 +35,10 @@ app.use((err, req, res, next) => {
 });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
 // Start our server
