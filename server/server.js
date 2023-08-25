@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("*", (req, res) => {
