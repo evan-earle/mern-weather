@@ -7,7 +7,10 @@ import allRoutes from "./routes/index.js";
 import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
 import path from "path";
+import { fileURLToPath } from "url";
 dotenv.config({ path: "./config/.env" });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Create an express app
 const app = express();
