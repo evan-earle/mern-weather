@@ -53,7 +53,7 @@ label {
 @media screen and (max-width: 1000px) {
   .Auth-form-container {
     height: 100vh;
-    background-image: url(../assets/drizzlenight.jpg);
+    background-image: url(../assets/drizzleNight.jpg);
     background-size: cover;
   }
   img {

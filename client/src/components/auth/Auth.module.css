@@ -55,7 +55,7 @@ label {
 @media screen and (max-width: 1000px) {
   .Auth-form-container {
     height: 100vh;
-    background-image: url(../../assets/clearday.jpg);
+    background-image: url(../../assets/clearDay.jpg);
     background-size: cover;
   }
   img {
