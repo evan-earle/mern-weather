@@ -3,10 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "App.jsx",
   "scripts": {
     "dev": "vite",
-    "build": "npm install && vite build",
+    "build": "npm install && BUILD_PATH=../dist && vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
