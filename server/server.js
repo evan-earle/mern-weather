@@ -23,26 +23,26 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
-connectToDB().then(() => {
-  // Routes
-  app.use("/api", allRoutes);
+connectToDB();
 
-  // error handler
-  app.use((err, req, res, next) => {
-    console.log({ err });
-    const status = err.statusCode || 500;
-    const message = err.message || "Internal server error";
-    return res.status(status).json({ message, stack: err.stack });
-  });
+// Routes
+app.use("/api", allRoutes);
 
-  app.use(express.static(path.join(__dirname, "dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/index.html"));
-  });
-
-  // Start our server
-  app.listen(process.env.PORT, () =>
-    console.log(`Server is running on port ${process.env.PORT}`)
-  );
+// error handler
+app.use((err, req, res, next) => {
+  console.log({ err });
+  const status = err.statusCode || 500;
+  const message = err.message || "Internal server error";
+  return res.status(status).json({ message, stack: err.stack });
 });
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
+// Start our server
+app.listen(process.env.PORT, () =>
+  console.log(`Server is running on port ${process.env.PORT}`)
+);
