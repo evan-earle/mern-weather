@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import allRoutes from "./routes/index.js";
 import { connectToDB } from "./config/database.js";
 import dotenv from "dotenv";
-import path from "path";
+import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 dotenv.config({ path: "./config/.env" });
 // const __filename = fileURLToPath(import.meta.url);
@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
-const __dirname = path.resolve();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use("*", (req, res) => {
