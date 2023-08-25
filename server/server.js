@@ -23,7 +23,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
-connectToDB();
 
 // Routes
 app.use("/api", allRoutes);
@@ -42,8 +41,9 @@ app.use("/", express.static(clientpath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/dist/index.html"));
 });
-
-// Start our server
-app.listen(process.env.PORT, () =>
-  console.log(`Server is running on port ${process.env.PORT}`)
-);
+connectToDB().then(() => {
+  // Start our server
+  app.listen(process.env.PORT, () =>
+    console.log(`Server is running on port ${process.env.PORT}`)
+  );
+});
