@@ -9,8 +9,8 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 dotenv.config({ path: "./config/.env" });
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.resolve();
 
 // Create an express app
 const app = express();
