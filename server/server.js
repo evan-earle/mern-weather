@@ -12,8 +12,6 @@ dotenv.config({ path: "./config/.env" });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-connectToDB();
-
 // Create an express app
 const app = express();
 
@@ -25,6 +23,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
+connectToDB();
 
 // Routes
 app.use("/api", allRoutes);
