@@ -35,4 +35,10 @@
 }
 
 @media screen and (max-width: 584px) {
+  .background {
+    margin-top: 3rem;
+  }
+  .weatherConditions {
+    width: 80%;
+  }
 }
